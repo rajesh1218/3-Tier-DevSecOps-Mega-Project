@@ -36,6 +36,7 @@ jobs:
         run: gitleaks detect --source . --exit-code 1
   Trivy:
     runs-on: ubuntu-latest
+    needs: [GitLeaks_Scan]
     steps:
       # Checkout source code
       - name: Checkout repository
