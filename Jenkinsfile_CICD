@@ -65,9 +65,9 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred') {
                         dir('api') {
-                            sh 'docker build -t adijaiswal/backend:latest .'
-                            sh 'trivy image --format table -o backend-image-report.html adijaiswal/backend:latest '
-                            sh 'docker push adijaiswal/backend:latest'
+                            sh 'docker build -t rajeshjallu/backend:latest .'
+                            sh 'trivy image --format table -o backend-image-report.html rajeshjallu/backend:latest '
+                            sh 'docker push rajeshjallu/backend:latest'
                            
                         }
                     }
@@ -80,9 +80,9 @@ pipeline {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred') {
                         dir('client') {
-                            sh 'docker build -t adijaiswal/frontend:latest .'
-                            sh 'trivy image --format table -o frontend-image-report.html adijaiswal/frontend:latest '
-                            sh 'docker push adijaiswal/frontend:latest'
+                            sh 'docker build -t rajeshjallu/frontend:latest .'
+                            sh 'trivy image --format table -o frontend-image-report.html rajeshjallu/frontend:latest '
+                            sh 'docker push rajeshjallu/frontend:latest'
                         }
                     }
                 }
