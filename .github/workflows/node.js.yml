@@ -7,16 +7,31 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  syntax-check:
     runs-on: ubuntu-latest
+
     steps:
-      # Checkout source code
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js 23
+        uses: actions/setup-node@v4
+        with:
+          node-version: 23
+
+      - name: Frontend Compilation (syntax check)
+        working-directory: client
+        run: |
+          find . -name "*.js" -exec node --check {} +
+
+      - name: Backend Compilation (syntax check)
+        working-directory: api
+        run: |
+          find . -name "*.js" -exec node --check {} +
+
   GitLeaks_Scan:
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [syntax-check]
     steps:
       # Checkout source code
       - name: Checkout repository
